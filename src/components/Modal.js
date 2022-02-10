@@ -3,12 +3,12 @@ import styled from "styled-components";
 export const Modal = ({
   children,
   Modal1,
-  setModal1,
   titulo = "Titulo Modal",
   mostrarHeader,
   mostrarOverlay,
   posicionModal,
   padding,
+  onClose
 }) => {
   return (
     <>
@@ -20,7 +20,7 @@ export const Modal = ({
                 <h3>{titulo}</h3>
               </EncabezadoModal>
             )}
-            <BotonCerrar onClick={() => setModal1(!Modal1)}>
+            <BotonCerrar onClick={onClose}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="16"

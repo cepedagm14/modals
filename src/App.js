@@ -2,45 +2,81 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { Modal } from "./components/Modal";
 
+const modales = [
+  {
+    id: "asdad",
+    overlay: true,
+    titulo: "Hola, Modal 1"
+  },
+  {
+    id: "314",
+    overlay: false,
+    titulo: "Hola, Modal 2"
+  },
+  {
+    id: "314",
+    overlay: false,
+    titulo: "Hola, Modal 3"
+  },
+  {
+    id: "314",
+    overlay: false,
+    titulo: "Hola, Modal 4",
+    tituloContenido: "Ventana Modal",
+    descripcion: "Lorem ipsum..."
+  }
+];
+
 const App = () => {
-  const [Modal1, setModal1] = useState(false);
+  /*const [Modal1, setModal1] = useState(false);
   const [Modal2, setModal2] = useState(false);
   const [Modal3, setModal3] = useState(false);
   const [Modal4, setModal4] = useState(false);
+  */
 
+  const [selectedModal, setSelectedModal] = useState(null);
+
+  const handleClose = () => {
+    setSelectedModal(null);
+  };
+  // const selectedModal = estructuraModales[state.selected];
+  //.map
   return (
     <div>
       <ContenedorBotones>
-        <Boton onClick={() => setModal1(!Modal1)}>Modal 1</Boton>
-        <Boton onClick={() => setModal2(!Modal2)}>Modal 2</Boton>
-        <Boton onClick={() => setModal3(!Modal3)}>Modal 3</Boton>
-        <Boton onClick={() => setModal4(!Modal4)}>Modal 4</Boton>
+        {modales.map((modal) => (
+          <Boton onClick={() => setSelectedModal(modal)}>{modal.titulo}</Boton>
+        ))}
       </ContenedorBotones>
 
+      {selectedModal && (
+        <Modal
+          open={selectedModal !== null}
+          onClose={handleClose}
+          Modal1={true}
+          //setModal1={setModal1}
+          titulo={selectedModal.titulo}
+          mostrarHeader={true}
+          mostrarOverlay={false}
+          posicionModal={"center"}
+          padding={"20px"}
+        >
+          <Contenido>
+            <h2>Ventana Modal</h2>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex
+              dignissimos aperiam iure officiis suscipit veniam modi quae quasi?
+              Deserunt fugit dolore ad vitae. Dolorem perspiciatis repellat
+              ipsam voluptas amet voluptatum!
+            </p>
+            <Boton onClick={handleClose}>Aceptar</Boton>
+          </Contenido>
+        </Modal>
+      )}
       {/* modal #1 */}
-      <Modal
-        Modal1={Modal1}
-        setModal1={setModal1}
-        titulo="Hola!"
-        mostrarHeader={true}
-        mostrarOverlay={false}
-        posicionModal={"center"}
-        padding={"20px"}
-      >
-        <Contenido>
-          <h2>Ventana Modal</h2>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex
-            dignissimos aperiam iure officiis suscipit veniam modi quae quasi?
-            Deserunt fugit dolore ad vitae. Dolorem perspiciatis repellat ipsam
-            voluptas amet voluptatum!
-          </p>
-          <Boton onClick={() => setModal1(!Modal1)}>Aceptar</Boton>
-        </Contenido>
-      </Modal>
 
       {/* modal #2 */}
-      <Modal
+      {/*<Modal
         Modal2={Modal2}
         setModal2={setModal2}
         titulo="Hola, este es el modal 2!"
@@ -55,6 +91,7 @@ const App = () => {
           <Boton onClick={() => setModal2(!Modal2)}>Aceptar</Boton>
         </Contenido>
       </Modal>
+      */}
     </div>
   );
 };
